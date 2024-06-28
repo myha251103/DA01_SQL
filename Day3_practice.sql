@@ -29,4 +29,18 @@ where low_fats = 'Y' and recyclable = 'Y';
 select name from Customer
 where referee_id != 2 or referee_id is null;
 ---bt11
-
+select name, population, area from World
+where area >= 3000000 or population >= 25000000;
+---bt12
+select distinct author_id as id from Views
+where viewer_id >= 1 and viewer_id = author_id
+order by author_id;
+---bt13
+SELECT part, assembly_step FROM parts_assembly
+where finish_date is null;
+---bt14
+select * from lyft_drivers
+where yearly_salary <= 30000 or yearly_salary > 70000;
+---bt15
+select advertising_channel from uber_advertising
+where year = 2019 and money_spent > 100000;
