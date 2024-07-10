@@ -4,7 +4,8 @@ where ID%2=0
 ---bt2
 select count( city) - count(distinct city) from station
 ---bt3
-Em chua biet giai a
+select ceiling(avg(salary) - avg(replace(salary, '0', '')))
+from EMPLOYEES  
 ---bt4
 SELECT 
 round(cast(sum(item_count*order_occurrences)/sum(order_occurrences) as DECIMAL), 1) as mean
