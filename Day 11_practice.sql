@@ -16,3 +16,14 @@ left join texts as t2 on t1.email_id = t2.email_id
 and t2.signup_action = 'Confirmed';
 
 ---bt3
+select t1.age_bucket,
+round(100.0*sum(case 
+  when t2.activity_type = 'send' then t2.time_spent
+else 0 end)/sum(t2.time_spent),2) as send_perc,
+round(100.0*sum(case 
+  when t2.activity_type = 'open' then t2.time_spent
+else 0 end)/sum(t2.time_spent),2) as open_perc
+from age_breakdown as t1
+inner join activities as t2 on t1.user_id = t2.user_id
+where t2.activity_type in ('send', 'open')
+group by t1.age_bucket;
