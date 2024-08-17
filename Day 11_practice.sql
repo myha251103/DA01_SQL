@@ -27,3 +27,10 @@ from age_breakdown as t1
 inner join activities as t2 on t1.user_id = t2.user_id
 where t2.activity_type in ('send', 'open')
 group by t1.age_bucket;
+---bt4 (output có đúng ko và yêu cầu của đề là gì?)
+SELECT a.customer_id, 
+FROM customer_contracts as a
+inner join products as b on a.product_id = b.product_id
+where b.product_name LIKE '%Azure%';
+---bt5
+
