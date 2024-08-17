@@ -33,4 +33,17 @@ FROM customer_contracts as a
 inner join products as b on a.product_id = b.product_id
 where b.product_name LIKE '%Azure%';
 ---bt5
+select a.employee_id, a.name, count(b.reports_to) as reports_count, round(avg(b.age)) as average_age
+from Employees as a
+left join Employees as b on a.employee_id = b.reports_to
+group by a.employee_id, a.name
+having reports_count != 0 and average_age is not null
+---bt6
+select a.product_name, sum(b.unit) as unit
+from Products as a
+inner join Orders as b on a.product_id = b.product_id
+where year(b.order_date) = 2020 and month(b.order_date) = 2
+group by a.product_name
+having sum(b.unit)>=100
+---bt7
 
