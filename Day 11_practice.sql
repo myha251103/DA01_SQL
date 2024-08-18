@@ -46,4 +46,7 @@ where year(b.order_date) = 2020 and month(b.order_date) = 2
 group by a.product_name
 having sum(b.unit)>=100
 ---bt7
-
+SELECT t1.page_id
+FROM pages as t1
+left join page_likes as t2 on t1.page_id = t2.page_id
+where t2.page_id is null;
