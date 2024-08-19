@@ -41,3 +41,11 @@ join payment as d on c.customer_id = d.customer_id
 group by a.city
 order by sum(d.amount) desc
 ---bt8
+SELECT a.city, e.country, sum(d.amount)
+from city as a
+join address as b on a.city_id = b.city_id
+join customer as c on b.address_id = c.address_id
+join payment as d on c.customer_id = d.customer_id
+join country as e on a.country_id = e.country_id
+group by e.country, a.city
+order by sum(d.amount) desc
