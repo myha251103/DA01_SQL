@@ -33,8 +33,21 @@ LEFT JOIN page_likes AS l
 WHERE l.page_id IS NULL;
 
 ---bt5
+SELECT 
+  7 AS month,
+  COUNT(DISTINCT ua1.user_id) AS monthly_active_users
+FROM user_actions ua1
+JOIN user_actions ua2 
+  ON ua1.user_id = ua2.user_id
+WHERE 
+  ua1.event_type IN ('sign-in', 'like', 'comment')
+  AND ua2.event_type IN ('sign-in', 'like', 'comment')
+  AND EXTRACT(YEAR FROM ua1.event_date) = 2022
+  AND EXTRACT(MONTH FROM ua1.event_date) = 7
+  AND EXTRACT(YEAR FROM ua2.event_date) = 2022
+  AND EXTRACT(MONTH FROM ua2.event_date) = 6;
 
----bt6 (tại sao không dùng được TO_CHAR nhỉ?)
+---bt6 (tại sao không dùng được TO_CHAR nhỉ? Có phải là do MySQL ko ạ?)
 select DATE_FORMAT(trans_date, '%Y-%m') as month, 
 country, 
 count(*) as trans_count,
