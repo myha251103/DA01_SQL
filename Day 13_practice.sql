@@ -57,5 +57,34 @@ sum(case when state = 'approved' then amount else 0 end) as approved_total_amoun
 from Transactions
 group by month, country;
 
+---bt7
+select 
+s.product_id, 
+s. year as first_year, 
+s.quantity,
+s.price
+from sales as s
+join 
+(select product_id, min(year) as first_year
+from sales
+group by product_id
+) first_sale
+on s.year = first_sale.first_year
+and s.product_id = first_sale.product_id;
 
+---em làm bt7 theo cách này leetcode accepted nhưng ChatGPT lại bảo sai ạ
+select 
+product_id, 
+min(year) as first_year, 
+quantity,
+price
+from sales 
+group by product_id;
+
+---bt8
+select c.customer_id 
+from customer as c
+join product as p on c.product_key = p.product_key
+group by c.customer_id
+having count(distinct c.product_key) = (select count(*) from product);
 
