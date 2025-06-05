@@ -88,3 +88,11 @@ join product as p on c.product_key = p.product_key
 group by c.customer_id
 having count(distinct c.product_key) = (select count(*) from product);
 
+---bt9
+select employee_id 
+from employees 
+where salary < 30000
+and manager_id not in (select employee_id from employees);
+
+---bt10
+
