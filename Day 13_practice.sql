@@ -95,4 +95,38 @@ where salary < 30000
 and manager_id not in (select employee_id from employees);
 
 ---bt10
+SELECT COUNT(DISTINCT t1.company_id) AS duplicate_companies
+FROM job_listings t1
+JOIN job_listings t2 
+  ON t1.company_id = t2.company_id
+ AND t1.title = t2.title
+ AND t1.description = t2.description
+ AND t1.job_id < t2.job_id; 
+
+---bt11
+(select u.name as results from Users as u
+join MovieRating as mr on u.user_id = mr.user_id
+group by u.user_id
+order by count(*) desc, u.name asc
+limit 1) 
+UNION
+(select m.title as results from movies as m
+join MovieRating as mr on m.movie_id = mr.movie_id    
+where mr.created_at like '2020-02-%'
+group by m.movie_id
+order by avg(rating) desc, m.title asc
+limit 1
+);
+
+---bt12
+SELECT requester_id AS id, COUNT(*) AS num 
+FROM (
+  SELECT requester_id FROM RequestAccepted 
+  UNION ALL
+  SELECT accepter_id FROM RequestAccepted
+) AS all_ids
+GROUP BY requester_id 
+ORDER BY num DESC
+LIMIT 1;
+
 
